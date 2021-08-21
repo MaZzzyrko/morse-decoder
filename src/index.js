@@ -37,9 +37,30 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-function decode(expr) {
-    // write your solution here
+function decode(x) {
+        const number = new RegExp(".{1,10}", "ig");
+        const theMessage = x.match(number);
+        
+        var endMessage = "";
+                    theMessage.forEach(theMessage => {
+                    if(theMessage === "**********")endMessage = endMessage + " ";
+                    else {
+                    
+            var messageMorse = "";
+            
+             for(var i = 0; i < theMessage.length - 1; i = i + 2) {
+                    if(theMessage[i] + theMessage[i + 1] === '10')messageMorse = messageMorse + ".";
+                    if(theMessage[i] + theMessage[i + 1] === '11')messageMorse = messageMorse + "-";
+             
+            }
+            endMessage = endMessage + MORSE_TABLE[messageMorse];
+          }
+        });
+        
+        return endMessage;
+      
 }
+
 
 module.exports = {
     decode
